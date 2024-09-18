@@ -8,7 +8,7 @@ export default function AssignmentEditor() {
       <br />
       <input id="wd-name" value="A1 - ENV + HTML" /><br /><br />
       <textarea id="wd-description">
-        The assignment is available online Submit a link to the landing page of
+        The assignment is available online Submit a link to the landing page of test
       </textarea>
       <br />
       <table>
