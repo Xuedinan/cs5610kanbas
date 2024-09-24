@@ -1,6 +1,7 @@
 import { FaPlus } from "react-icons/fa6";
 import GreenCheckmark from "./GreenCheckmark";
 import React from "react";
+import StopCheckmark from "./StopCheckmark";
 
 export default function ModulesControls() {
   return (
@@ -27,11 +28,26 @@ export default function ModulesControls() {
           {/* Create two more items with IDs wd-unpublish-all-modules-and-items and
               wd-unpublish-modules-only with labels Unpublish all modules and items
               and Unpublish modules only */}
+          <li>
+            <a id="wd-unpublish-all-modules-and-items" className="dropdown-item" href="#">
+              <StopCheckmark />
+              Unpublish all modules and items</a>
+          </li>
+          <li>
+            <a id="wd-unpublish-modules-only" className="dropdown-item" href="#">
+              <StopCheckmark />
+              Unpublish modules only</a>
+          </li>
         </ul>
       </div>
       {/* Implement the View Progress and Collapse All buttons with IDs wd-view-progress and wd-collapse-all */}
+        <button id="wd-view-progress" className="btn btn-lg btn-secondary float-end me-1"
+          type="button">
+          View Progress</button>
+        <button id="wd-collapse-all" className="btn btn-lg btn-secondary float-end me-1"
+          type="button">
+          Collapse All</button>
     </div>
 );}
 
 
-{} update this file
