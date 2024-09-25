@@ -19,6 +19,7 @@ export default function Courses() {
     <div className="d-none d-md-block">
 
             <CoursesNavigation />
+            <div className="wd-main-content-offset p-3">
 
             <Routes>
               <Route path="/"
@@ -31,6 +32,7 @@ export default function Courses() {
                      element={<h3>{<AssignmentEditor/>}</h3>} />
               <Route path="People" element={<h3>{<PeopleTable/>}</h3>} />
             </Routes>
+            </div>
     </div></div>
     </div>
 );}

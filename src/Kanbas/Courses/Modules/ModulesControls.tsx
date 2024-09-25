@@ -5,7 +5,7 @@ import StopCheckmark from "./StopCheckmark";
 
 export default function ModulesControls() {
   return (
-    <div id="wd-modules-controls" className="text-nowrap">
+    <div id="wd-modules-controls" className="text-nowrap d-flex d-none d-md-block d-sm-none">
       <button id="wd-add-module-btn" className="btn btn-lg btn-danger me-1 float-end">
         <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
         Module</button>

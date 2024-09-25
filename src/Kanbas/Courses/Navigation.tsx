@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import React from "react";
 
+
+
 export default function CoursesNavigation() {
   return (
-    <div id="wd-courses-navigation" className="wd list-group fs-5 rounded-0">
+    <div id="wd-courses-navigation" className="wd list-group fs-5 rounded-0 position-fixed d-flex d-none d-md-block d-sm-none">
       <Link to="/Kanbas/Courses/1234/Home" id="wd-course-home-link"
         className="list-group-item active border border-0"> Home </Link>
       <Link to="/Kanbas/Courses/1234/Modules" id="wd-course-modules-link"
@@ -21,3 +23,5 @@ export default function CoursesNavigation() {
     </div>
 );}
 
+// list-group rounded-0 position-fixed
+//          bottom-0 top-0 d-none d-md-block bg-black z-2

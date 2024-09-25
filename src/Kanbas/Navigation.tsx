@@ -44,7 +44,7 @@ export default function KanbasNavigation() {
         <FaInbox className="fs-1 text-danger" /><br />
         Inbox </Link><br />
 
-      <Link to="/Kanbas/Dashboard" id="wd-course-link"
+      <Link to="/Labs" id="wd-labs-link"
         className="list-group-item text-white
                    bg-black text-center border-0">
         <IoSettingsOutline className="fs-1 text-danger" /><br />

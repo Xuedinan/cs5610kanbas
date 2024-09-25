@@ -15,7 +15,8 @@ import { BiBell } from "react-icons/bi";
 
 export default function CourseStatus() {
   return (
-    <div id="wd-course-status" style={{ width: "300px" }}>
+    <div id="wd-course-status" style={{ width: "300px", marginLeft:"30px" }}>
+
       <h2>Course Status</h2>
       <div className="d-flex">
         <div className="w-50 pe-1">
@@ -42,6 +43,7 @@ export default function CourseStatus() {
         <FaChartBar className="me-2 fs-5" /> New Analytics </button>
               <button className="btn btn-lg btn-secondary w-100 mt-1 text-start">
         <BiBell className="me-2 fs-5" />View Course Notifications </button>
+
     </div>
 );}
 
