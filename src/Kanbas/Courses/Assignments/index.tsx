@@ -3,7 +3,7 @@ import AssignmentControls from './AssignmentControls';
 import { BsGripVertical } from 'react-icons/bs';
 import AssignmentControlsButtons from './AssignmentControlsButtons';
 import LessonControlButtons from './LessonControlButtons';
-import { GiNotebook } from "react-icons/gi";
+import { PiNotePencilThin } from 'react-icons/pi';
 
 
 export default function Modules() {
@@ -50,10 +50,10 @@ export default function Modules() {
 
             <li className="wd-lesson list-group-item p-3 ps-1 d-flex align-items-center">
               <BsGripVertical className="me-2 fs-3" />
-              <GiNotebook className="me-2 fs-3 ms-2" />
+              <PiNotePencilThin className="me-2 fs-3 ms-2 btn-secondary text-success" />
               <div className="flex-grow-1 ms-2">
                 <h6 className="mb-1">A1</h6>
-                <small className="text-muted">Multiple Modules | Not available until May 6 at 12:00am | Due May 13 at 11:59pm | 100 pts</small>
+                <small className="text-muted"><span style={{ color: 'red' }}>Multiple Modules</span> | <strong>Not available until</strong> May 6 at 12:00am | <strong>Due</strong> May 13 at 11:59pm | 100 pts</small>
               </div>
               <LessonControlButtons    />
             </li>
@@ -61,21 +61,21 @@ export default function Modules() {
 
             <li className="wd-lesson list-group-item p-3 ps-1 d-flex align-items-center">
               <BsGripVertical className="me-2 fs-3" />
-              <GiNotebook className="me-2 fs-3 ms-2" />
+              <PiNotePencilThin className="me-2 fs-3 ms-2 btn-secondary text-success" />
               <div className="flex-grow-1 ms-2">
                 <h6 className="mb-1">A2</h6>
-                <small className="text-muted">Multiple Modules | Not available until May 13 at 12:00am | Due May 20 at 11:59pm | 100 pts</small>
+                <small className="text-muted"><span style={{ color: 'red' }}>Multiple Modules</span> | <strong>Not available until</strong> May 13 at 12:00am | <strong>Due</strong> May 20 at 11:59pm | 100 pts</small>
               </div>
               <LessonControlButtons />
             </li>
 
 
             <li className="wd-lesson list-group-item p-3 ps-1 d-flex align-items-center">
-              <BsGripVertical className="me-2 fs-3 ms-2" />
-              <GiNotebook className="me-2 fs-3" />
+              <BsGripVertical className="me-2 fs-3" />
+              <PiNotePencilThin className="me-2 fs-3 ms-2 btn-secondary text-success" />
               <div className="flex-grow-1 ms-2">
                 <h6 className="mb-1">A3</h6>
-                <small className="text-muted">Multiple Modules | Not available until May 20 at 12:00am | Due May 27 at 11:59pm | 100 pts</small>
+                <small className="text-muted"><span style={{ color: 'red' }}>Multiple Modules</span> | <strong>Not available until</strong> May 20 at 12:00am | <strong>Due</strong> May 27 at 11:59pm | 100 pts</small>
               </div>
               <LessonControlButtons />
             </li>
