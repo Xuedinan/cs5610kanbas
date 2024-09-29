@@ -70,7 +70,7 @@ export default function Modules() {
             </li>
 
 
-            <li className="wd-lesson list-group-item p-3 ps-1 d-flex align-items-center">
+            <li className="wd-lesson list-group-item p-3 ps-1 d-flex flex-grow align-items-center">
               <BsGripVertical className="me-2 fs-3" />
               <PiNotePencilThin className="me-2 fs-3 ms-2 btn-secondary text-success" />
               <div className="flex-grow-1 ms-2">

@@ -7,6 +7,35 @@ body * {  font-family: Arial, Helvetica, sans-serif;  }
   }
 }
 
+@media (max-width: 768px) {
+  .right-menu {
+    position:absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+.left-menu {
+  width: 120px;
+}
+
+@media (min-width: 768px) {
+  .left-menu {
+  top: 0;
+  bottom: 0;
+  background: #000;
+  }
+}
+
+@media (max-width: 768px) {
+  .left-menu {
+    position:absolute;
+    top: 0;
+    left: 0;
+    display: block !important;
+  }
+}
+
 .list-group.wd > .list-group-item.active {
   color: black;
   background-color: white;

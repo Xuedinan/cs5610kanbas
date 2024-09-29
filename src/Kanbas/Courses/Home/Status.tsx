@@ -15,7 +15,7 @@ import { BiBell } from "react-icons/bi";
 
 export default function CourseStatus() {
   return (
-    <div id="wd-course-status" style={{ width: "300px", marginLeft:"30px" }}>
+    <div id="wd-course-status" className="d-lg-block d-none" style={{ width: "300px", marginLeft:"30px" }}>
 
       <h2>Course Status</h2>
       <div className="d-flex">

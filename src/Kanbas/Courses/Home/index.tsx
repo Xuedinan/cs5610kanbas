@@ -5,12 +5,12 @@ import React from "react";
 export default function Home() {
   return (
 <div className="d-flex" id="wd-home">
-  <div className="flex-fill flex-grow-1">
+  <div className="flex-fill">
 
           <Modules />
           </div>
 
-  <div className="d-none d-lg-block justify-content-end">
+  <div className="d-md-block">
           <CourseStatus />
 </div>
 </div>

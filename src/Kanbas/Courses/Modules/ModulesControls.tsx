@@ -5,10 +5,11 @@ import StopCheckmark from "./StopCheckmark";
 
 export default function ModulesControls() {
   return (
-    <div id="wd-modules-controls" className="text-nowrap d-flex d-none d-md-block d-sm-none">
+    <div id="wd-modules-controls" className="text-nowrap d-flex">
       <button id="wd-add-module-btn" className="btn btn-lg btn-danger me-1 float-end">
         <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
         Module</button>
+
       <div className="dropdown d-inline me-1 float-end">
         <button id="wd-publish-all-btn" className="btn btn-lg btn-secondary dropdown-toggle"
           type="button" data-bs-toggle="dropdown">
@@ -40,6 +41,7 @@ export default function ModulesControls() {
           </li>
         </ul>
       </div>
+
       {/* Implement the View Progress and Collapse All buttons with IDs wd-view-progress and wd-collapse-all */}
         <button id="wd-view-progress" className="btn btn-lg btn-secondary float-end me-1"
           type="button">

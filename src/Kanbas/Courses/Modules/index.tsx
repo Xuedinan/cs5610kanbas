@@ -9,7 +9,7 @@ export default function Modules() {
     <div>
       <ModulesControls /><br /><br /><br /><br />
       
-      <ul id="wd-modules" className="list-group rounded-0 d-flex flex-grow-1 d-none d-md-block d-sm-none d-lg-block">
+      <ul id="wd-modules" className="list-group rounded-0 d-flex flex-grow d-md-block d-lg-block">
         <li className="wd-module list-group-item p-0 mb-5 fs-5 border-gray">
           <div className="wd-title p-3 ps-2 bg-secondary"> 
             <BsGripVertical className="me-2 fs-3" />

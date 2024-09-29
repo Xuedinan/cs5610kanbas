@@ -12,15 +12,16 @@ import { FaAlignJustify } from 'react-icons/fa';
 export default function Courses() {
   return (
     <div id="wd-courses">
-  <h2 className="text-danger">
-      <FaAlignJustify className="me-4 fs-4 mb-1" />
+  <h2 className="text-danger d-flex d-none d-md-block">
+      <FaAlignJustify className="me-4 fs-4 mb-1 " />
       Course 1234 </h2> <hr />
   <div className="d-flex">
-    <div className="d-none d-md-block">
+    <div className="d-md-block flex-fill">
 
-            <CoursesNavigation />
+              <CoursesNavigation />
+
             <div className="wd-main-content-offset p-3">
-
+              
             <Routes>
               <Route path="/"
                      element={<Navigate to="Home" />} />
