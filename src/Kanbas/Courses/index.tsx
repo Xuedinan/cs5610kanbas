@@ -14,7 +14,7 @@ export default function Courses() {
     <div id="wd-courses">
   <h2 className="text-danger d-flex d-none d-md-block">
       <FaAlignJustify className="me-4 fs-4 mb-1 " />
-      Course 1234 </h2> <hr />
+      Course 1234 </h2> <hr className="d-none d-md-block"/>
   <div className="d-flex">
     <div className="d-md-block flex-fill">
 

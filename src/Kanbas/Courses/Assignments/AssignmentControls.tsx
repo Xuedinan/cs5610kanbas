@@ -1,4 +1,4 @@
-import { FaPlus } from "react-icons/fa"; // 引入搜索图标和加号图标
+import { FaPlus } from "react-icons/fa";
 import React from "react";
 import { IoIosSearch } from "react-icons/io";
 

@@ -6,14 +6,14 @@ import LessonControlButtons from './LessonControlButtons';
 import { PiNotePencilThin } from 'react-icons/pi';
 
 
-export default function Modules() {
+export default function Assignment() {
   return (
     <div>
 
       <AssignmentControls /><br /><br />
       
 
-      <ul id="wd-modules" className="list-group rounded-0">
+      <ul id="wd-assignment" className="list-group rounded-0">
         <li className="wd-module list-group-item p-0 mb-4 fs-5 border-lightgray">
           <div className="wd-title p-3 ps-2 bg-light d-flex justify-content-between align-items-center"> 
             <div>
@@ -31,8 +31,8 @@ export default function Modules() {
         >
         </button>
         <ul className="dropdown-menu">
-          <li><a className="dropdown-item" href="#">Action 1</a></li>
-          <li><a className="dropdown-item" href="#">Action 2</a></li>
+          <li><a className="dropdown-item" href="#">Option 1</a></li>
+          <li><a className="dropdown-item" href="#">Option 2</a></li>
         </ul>
       </span>
               
@@ -85,7 +85,3 @@ export default function Modules() {
     </div>
   );
 }
-
-
-
-// need to update auto adjust and assignment + align with the design
