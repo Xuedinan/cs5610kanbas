@@ -4,9 +4,12 @@ import { BsGripVertical } from 'react-icons/bs';
 import AssignmentControlsButtons from './AssignmentControlsButtons';
 import LessonControlButtons from './LessonControlButtons';
 import { PiNotePencilThin } from 'react-icons/pi';
+import { Link } from 'react-router-dom';
 
 
-export default function Assignment() {
+const assignmentId = 123; // Example ID, you can replace it with actual dynamic value
+
+export default function Assignments() {
   return (
     <div>
 
@@ -50,7 +53,15 @@ export default function Assignment() {
 
             <li className="wd-lesson list-group-item p-3 ps-1 d-flex align-items-center">
               <BsGripVertical className="me-2 fs-3" />
-              <PiNotePencilThin className="me-2 fs-3 ms-2 btn-secondary text-success" />
+
+
+
+              <Link to={`/Kanbas/Courses/1234/Assignments/Assignment:${assignmentId}`} className="border-0 bg-white">
+                <PiNotePencilThin className="me-2 fs-3 ms-2 btn-secondary text-success" />
+              </Link>
+
+
+
               <div className="flex-grow-1 ms-2">
                 <h6 className="mb-1">A1</h6>
                 <small className="text-muted"><span style={{ color: 'red' }}>Multiple Modules</span> | <strong>Not available until</strong> May 6 at 12:00am | <strong>Due</strong> May 13 at 11:59pm | 100 pts</small>
@@ -61,7 +72,9 @@ export default function Assignment() {
 
             <li className="wd-lesson list-group-item p-3 ps-1 d-flex align-items-center">
               <BsGripVertical className="me-2 fs-3" />
-              <PiNotePencilThin className="me-2 fs-3 ms-2 btn-secondary text-success" />
+              <Link to={`/Kanbas/Courses/1234/Assignments/Assignment:${assignmentId}`} className="border-0 bg-white">
+                <PiNotePencilThin className="me-2 fs-3 ms-2 btn-secondary text-success" />
+              </Link>
               <div className="flex-grow-1 ms-2">
                 <h6 className="mb-1">A2</h6>
                 <small className="text-muted"><span style={{ color: 'red' }}>Multiple Modules</span> | <strong>Not available until</strong> May 13 at 12:00am | <strong>Due</strong> May 20 at 11:59pm | 100 pts</small>
@@ -72,7 +85,9 @@ export default function Assignment() {
 
             <li className="wd-lesson list-group-item p-3 ps-1 d-flex flex-grow align-items-center">
               <BsGripVertical className="me-2 fs-3" />
-              <PiNotePencilThin className="me-2 fs-3 ms-2 btn-secondary text-success" />
+              <Link to={`/Kanbas/Courses/1234/Assignments/Assignment:${assignmentId}`} className="border-0 bg-white">
+                <PiNotePencilThin className="me-2 fs-3 ms-2 btn-secondary text-success" />
+              </Link>
               <div className="flex-grow-1 ms-2">
                 <h6 className="mb-1">A3</h6>
                 <small className="text-muted"><span style={{ color: 'red' }}>Multiple Modules</span> | <strong>Not available until</strong> May 20 at 12:00am | <strong>Due</strong> May 27 at 11:59pm | 100 pts</small>

@@ -20,7 +20,6 @@ export default function Modules() {
 
   return (
     <>
-      {/* 顶部导航 */}
       <div
         style={{ height: "60px" }}
         className="navbar-container bg-black text-white d-flex justify-content-between align-items-center p-3 position-fixed w-100 top-0 left-0 d-md-none"
@@ -42,7 +41,6 @@ export default function Modules() {
         </nav>
       </div>
 
-      {/* 菜单展开时，显示全屏覆盖的导航 */}
       {isMenuVisible && (
         <div
           id="wd-kanbas-navigation"
@@ -96,8 +94,6 @@ export default function Modules() {
       </div>
 
 
-
-      {/* 模块部分 */}
       <div>
         <ModulesControls /><br /><br /><br /><br />
         

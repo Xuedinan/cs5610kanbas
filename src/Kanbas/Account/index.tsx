@@ -14,7 +14,8 @@ export default function Account() {
           <td valign="top">
             <AccountNavigation />
           </td>
-          <td valign="top">
+          <div className="wd-main-content-offset p-3"></div>
+          <td valign="top" style={{width:"320px"}}>
             <Routes>
               <Route path="/"
                      element={<Navigate to="/Kanbas/Account/Signin" />} />
