@@ -9,13 +9,13 @@ export default function AssignmentEditor() {
         {/* Assignment Name */}
         <div className="mb-3">
           <label htmlFor="wd-name" className="form-label fw-bold">Assignment Name</label>
-          <input id="wd-name" value="A1" className="form-control" readOnly />
+          <input id="wd-name" defaultValue="A1" className="form-control"/>
         </div>
 
         {/* Description */}
         <div className="mb-3">
           <label htmlFor="wd-description" className="form-label fw-bold">Description</label>
-          <textarea id="wd-description" className="form-control" rows={5} value="The assignment is available online Submit a link to the landing page of test" readOnly />
+          <textarea id="wd-description" className="form-control" rows={5} defaultValue="The assignment is available online Submit a link to the landing page of test" />
         </div>
 
         {/* Points and Assignment Group */}
@@ -24,7 +24,7 @@ export default function AssignmentEditor() {
             <label htmlFor="wd-points" className="form-label">Points</label>
           </div>
           <div className="col-md-8">
-            <input id="wd-points" value={100} className="form-control" readOnly />
+            <input id="wd-points" defaultValue={100} className="form-control"/>
           </div>
         </div>
 
@@ -68,7 +68,6 @@ export default function AssignmentEditor() {
             <label htmlFor="wd-submission-type" className="form-label">Submission Type</label>
           </div>
 
-          {/* 右侧的 card */}
           <div className="col-md-8">
             <div className="card p-3">
               <div className="row mb-3">
@@ -116,11 +115,11 @@ export default function AssignmentEditor() {
             <label htmlFor="wd-assign-to" className="form-label">Assign</label>
           </div>
 
-          {/* 右侧的 card 内容 */}
           <div className="col-md-10">
             <div className="card p-3">
               <div className="row mb-3">
                 <div className="col-md-12">
+<label htmlFor="wd-assign-to" className="form-label">Assign to</label>
 <div className="input-group">
   <div className="form-control d-flex align-items-center">
     <span className="badge bg-light text-dark">Everyone

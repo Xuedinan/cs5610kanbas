@@ -13,7 +13,7 @@ import { PiNotePencilThin } from 'react-icons/pi';
 export default function Courses() {
   return (
     <div id="wd-courses">
-  <h2 className="text-danger d-flex d-none d-md-block sticky-top ">
+  <h2 className="text-danger d-flex d-none d-md-block sticky-top">
       <FaAlignJustify className="me-4 fs-4 mb-1 " />
       Course 1234 </h2> 
       <hr className="d-none d-md-block"/>

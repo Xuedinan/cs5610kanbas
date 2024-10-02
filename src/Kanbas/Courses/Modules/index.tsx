@@ -1,21 +1,29 @@
 import React, { useState } from 'react';
 import ModulesControls from './ModulesControls';
-import { BsGripVertical } from 'react-icons/bs';
+import { BsGripVertical, BsPlug } from 'react-icons/bs';
 import ModuleControlButtons from './ModuleControlButtons';
 import LessonControlButtons from './LessonControlButtons';
 import { AiOutlineDashboard } from "react-icons/ai";
-import { IoCalendarOutline, IoSettingsOutline } from "react-icons/io5";
+import { IoCalendarOutline, IoHomeOutline, IoPeopleOutline, IoSettingsOutline } from "react-icons/io5";
 import { LiaBookSolid } from "react-icons/lia";
 import { FaInbox, FaRegCircleUser } from "react-icons/fa6";
 import { Link } from 'react-router-dom';
-import { IoIosArrowDown } from 'react-icons/io';
+import { IoIosArrowDown, IoIosGitNetwork } from 'react-icons/io';
+import { GrNotes } from 'react-icons/gr';
+import { GoRocket } from 'react-icons/go';
 
 export default function Modules() {
-  const [isMenuVisible, setMenuVisible] = useState(false);
+  const [isLeftMenuVisible, setLeftMenuVisible] = useState(false);
+  const [isRightMenuVisible, setRightMenuVisible] = useState(false);
 
-  // Toggle menu visibility
-  const toggleMenu = () => {
-    setMenuVisible(!isMenuVisible);
+  const toggleLeftMenu = () => {
+    setLeftMenuVisible(!isLeftMenuVisible);
+    if (isRightMenuVisible) setRightMenuVisible(false); 
+  };
+
+  const toggleRightMenu = () => {
+    setRightMenuVisible(!isRightMenuVisible);
+    if (isLeftMenuVisible) setLeftMenuVisible(false); 
   };
 
   return (
@@ -26,30 +34,28 @@ export default function Modules() {
       >
         <h5 className="m-0 flex-grow-1 d-flex justify-content-center">CS5200 2024 Fall Course 1234</h5>
         <nav className="left-menu navbar navbar-expand-md navbar-dark list-group rounded-0 position-fixed d-md-none">
-          <a className="navbar-brand" href="#"></a>
           <button
             className="navbar-toggler"
             type="button"
             aria-controls="navbarSupportedContent"
             aria-expanded="false"
             aria-label="Toggle navigation"
-            onClick={toggleMenu}
+            onClick={toggleLeftMenu}
           >
-            <span className="navbar-toggler-icon">
-</span>
+            <span className="navbar-toggler-icon"></span>
           </button>
         </nav>
       </div>
 
-      {isMenuVisible && (
+      {isLeftMenuVisible && (
         <div
-          id="wd-kanbas-navigation"
-          className="list-group position-fixed top-0 bottom-0 start-0 end-0 bg-white z-3"
+          id="left-kanbas-navigation"
+          className="list-group position-fixed top-0 bottom-0 start-0 bg-white z-3"
           style={{ width: "100%", height: "100%", overflowY: "auto" }}
         >
           <button
             className="btn-close position-absolute top-0 end-0 m-3"
-            onClick={toggleMenu}
+            onClick={toggleLeftMenu}
           ></button>
 
           <div className="p-4 z-10">
@@ -78,20 +84,62 @@ export default function Modules() {
 
       <div>
         <nav className="right-menu navbar navbar-expand-md navbar-dark list-group rounded-0 position-fixed d-md-none">
-          <a className="navbar-brand" href="#"></a>
           <button
             className="navbar-toggler"
             type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent"
             aria-expanded="false"
             aria-label="Toggle navigation"
+            onClick={toggleRightMenu}
           >
             <span><IoIosArrowDown /></span>
           </button>
         </nav>
       </div>
+
+      {isRightMenuVisible && (
+        <div
+          id="right-kanbas-navigation"
+          className="list-group position-fixed top-0 bottom-0 start-0 bg-white z-3"
+          style={{ width: "100%", height: "100%", overflowY: "auto" }}
+        >
+          <button
+            className="btn-close position-absolute top-0 end-0 m-3"
+            onClick={toggleRightMenu}
+          ></button>
+
+          <div className="p-4 z-10k">
+            <Link to="/Kanbas/Courses/1234/Home" className="list-group-item border-0 text-danger">
+            <IoHomeOutline className="align-self-center me-3"/>
+              Home
+            </Link>
+            <Link to="/Kanbas/Courses/1234/Modules" className="list-group-item text-danger border-0">
+            <IoIosGitNetwork className="align-self-center me-3" />
+              Modules
+            </Link>
+            <Link to="/Kanbas/Courses/1234/Piazza" className="list-group-item text-danger border-0">
+            <BsPlug className="align-self-center me-3" />
+              Piazza
+            </Link>
+            <Link to="/Kanbas/Courses/1234/Zoom" className="list-group-item text-danger border-0">
+            <BsPlug className="align-self-center me-3" />
+              Zoom
+            </Link>
+            <Link to="/Kanbas/Courses/1234/Assignments" className="list-group-item text-danger border-0">
+            <GrNotes className="align-self-center me-3"/>
+              Assignments
+            </Link>
+            <Link to="/Kanbas/Courses/1234/Quizzes" className="list-group-item text-danger border-0">
+            <GoRocket className="align-self-center me-3"/>
+              Quizzes
+            </Link>
+            <Link to="/Kanbas/Courses/:cid/People" className="list-group-item text-danger border-0">
+            <IoPeopleOutline className="align-self-center me-3"/>
+              People
+            </Link>
+          </div>
+        </div>
+      )}
 
 
       <div>
@@ -173,75 +221,6 @@ export default function Modules() {
     </>
   );
 }
-
-
-
-      {/* <ul id="wd-modules">
-        <li className="wd-module">
-          <div className="wd-title">Week 1, Lecture 1 - Course Introduction, Syllabus, Agenda</div>
-          <ul className="wd-lessons">
-            <li className="wd-lesson">
-              <span className="wd-title">LEARNING OBJECTIVES</span>
-              <ul className="wd-content">
-                <li className="wd-content-item">Introduction to the course</li>
-                <li className="wd-content-item">Learn what is Web Development</li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <ul className="wd-lessons">
-            <li className="wd-lesson">
-              <span className="wd-title">READING</span>
-              <ul className="wd-content">
-                <li className="wd-content-item">Full Stack Developer - Chapter 1 - Introduction</li>
-                <li className="wd-content-item">Full Stack Developer - Chapter 2 - Creating User Interface</li>
-              </ul>
-            </li>
-          </ul>
-        <ul className="wd-lessons">
-            <li className="wd-lesson">
-              <span className="wd-title">SLIDES</span>
-              <ul className="wd-content">
-                <li className="wd-content-item">Introduction to Web Development</li>
-                <li className="wd-content-item">Creating an HTTP server with Node.js</li>
-                <li className="wd-content-item">Creating a React Application</li>
-              </ul>
-            </li>
-          </ul>
-        <li className="wd-module">
-          <div className="wd-title">Week 1, Lecture 2 - Formatting User Interface with HTML</div>
-          <ul className="wd-lessons">
-            <li className="wd-lesson">
-              <span className="wd-title">LEARNING OBJECTIVES</span>
-                <ul className="wd-content">
-                <li className="wd-content-item">Learn how to create user interface with HTML</li>
-                <li className="wd-content-item">Deploy the assignment to Netlify</li>
-              </ul>
-            </li>
-                <li className="wd-lesson">
-              <span className="wd-title">SLIDES</span>
-                <ul className="wd-content">
-                <li className="wd-content-item">Introduction to HTML and the DOM</li>
-                <li className="wd-content-item">Formatting Web content with Headings</li>
-                <li className="wd-content-item">Formatting content with Lists and Tables</li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-      </ul> */}
-
-      {/* Implement Collapse All button, View Progress button, etc. */}
-        {/* <div className="button-container">
-        <button className='wb-collapse'>Collapse All</button>
-        <button className='wb-progress'>View Progress</button>
-        <select id="wb-options">
-            <option value="Publish All">Publish All</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
-            <option value="option4">Option 4</option>
-        </select>
-        <button className='wb-add-module'>+ Module</button>
-        </div> */}
 
 
 
