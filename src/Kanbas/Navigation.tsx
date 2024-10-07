@@ -9,8 +9,6 @@ import { FaInbox, FaRegCircleUser } from "react-icons/fa6";
 
 export default function KanbasNavigation() {
 
-
-
   return (
     <div>
 
