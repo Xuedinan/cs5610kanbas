@@ -5,14 +5,9 @@ import * as db from '../../Database';
 import { useNavigate } from 'react-router-dom';
 
 export default function AssignmentEditor() {
-  const { cid } = useParams();
+  const { cid, aid } = useParams();
   const assignments = db.assignments;
   const navigate = useNavigate();
-
-  
-    if (!assignments || assignments.length === 0) {
-    return <div>Loading assignments...</div>; // 或者显示一个加载指示器
-  }
 
 
   return (
@@ -247,14 +242,14 @@ export default function AssignmentEditor() {
                 <button
                   className="btn btn-secondary me-2"
                   type="submit"
-                  onClick={() => navigate(`/Kanbas/Courses/${assignment.course}/Assignments/Assignment:${assignment._id}`)}
+                  onClick={() => navigate(`/Kanbas/Courses/${assignment.course}/Assignments`)}
                 >
                   Cancel
                 </button>
                   <button
                   className="btn btn-danger"
                   type="submit"
-                  onClick={() => navigate(`/Kanbas/Courses/${assignment.course}/Assignments/Assignment:${assignment._id}`)}
+                  onClick={() => navigate(`/Kanbas/Courses/${assignment.course}/Assignments`)}
                 >
                   Save
                 </button>
