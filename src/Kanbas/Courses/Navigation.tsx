@@ -14,7 +14,8 @@ const links = ["Home", "Modules", "Piazza", "Zoom", "Assignments", "Quizzes", "G
 
   return (
     <div>
-      <div id="wd-courses-navigation" className="wd list-group fs-5 rounded-0 position-fixed d-flex d-none d-md-block">
+      <div id="wd-courses-navigation" className="wd list-group fs-5 rounded-0 position-fixed d-flex d-none d-md-block"
+      >
         {links.map((links) => (
           <Link key={course?._id} to={`/Kanbas/Courses/${course?._id}/${links}`} id={`wd-course-${links}-link`} 
           className={`list-group-item text-danger border border-0 ${pathname.includes(links) ? "active" : ""}`}>

@@ -17,11 +17,11 @@ export default function Courses() {
 
   return (
     <div id="wd-courses">
-  <h2 className="text-danger d-flex d-none d-md-block sticky-top">
-      <FaAlignJustify className="me-4 fs-4 mb-1 " />
+  <h2 className="text-danger d-flex d-none d-md-block sticky-top" style={{backgroundColor: "white"}}>
+      <FaAlignJustify className="me-4 fs-4 mb-1" />
       {course && course.name} &gt; {pathname.split("/")[4]}
+            <hr className="d-none d-md-block"/>
       </h2> 
-      <hr className="d-none d-md-block"/>
   <div className="d-flex">
 
 

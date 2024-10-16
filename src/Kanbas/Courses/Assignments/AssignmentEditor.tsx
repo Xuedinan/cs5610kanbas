@@ -8,14 +8,14 @@ export default function AssignmentEditor() {
   const { cid, aid } = useParams();
   const assignments = db.assignments;
   const navigate = useNavigate();
-
+  const aidUpdate = aid?.split(":")[1];
 
   return (
     <div className="container mt-2" id="wd-assignments-editor">
       <div className="wd-main-content-offset p-3">
         {/* Assignment Name */}
         {assignments
-          .filter((assignment: any) => assignment.course === cid)
+          .filter((assignment: any) => assignment.course === cid && assignment._id === aidUpdate) 
           .map((assignment: any) => (
             
             <div key={assignment._id}>
