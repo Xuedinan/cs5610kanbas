@@ -8,15 +8,19 @@ import { PiCrosshair } from "react-icons/pi";
 import { FaChartBar } from 'react-icons/fa';
 import { CiBullhorn } from "react-icons/ci";
 import { BiBell } from "react-icons/bi";
+import { useSelector } from 'react-redux';
 
 
 
 {/* Find more icons */}
 
 export default function CourseStatus() {
+    const { currentUser } = useSelector((state: any) => state.accountReducer);
+
   return (
     <div id="wd-course-status" className="d-lg-block d-none" style={{ width: "300px", marginLeft:"30px" }}>
-
+      { currentUser.role === "FACULTY" && (
+        <div>
       <h2>Course Status</h2>
       <div className="d-flex">
         <div className="w-50 pe-1">
@@ -43,7 +47,7 @@ export default function CourseStatus() {
         <FaChartBar className="me-2 fs-5" /> New Analytics </button>
               <button className="btn btn-lg btn-secondary w-100 mt-1 text-start">
         <BiBell className="me-2 fs-5" />View Course Notifications </button>
-
+        </div>)}
     </div>
 );}
 

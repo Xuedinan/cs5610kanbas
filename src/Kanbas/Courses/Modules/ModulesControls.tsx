@@ -3,14 +3,19 @@ import GreenCheckmark from "./GreenCheckmark";
 import React from "react";
 import StopCheckmark from "./StopCheckmark";
 import ModuleEditor from "./ModuleEditor";
+import { useSelector } from "react-redux";
 
 
 export default function ModulesControls(
 { moduleName, setModuleName, addModule }:
 { moduleName: string; setModuleName: (title: string) => void; addModule: () => void; }) 
  {
+
+    const { currentUser } = useSelector((state: any) => state.accountReducer);
+
   return (
     <div className="wd-top-content-offset p-3">
+     {currentUser.role === "FACULTY" && (  
     <div id="wd-modules-controls" className="text-nowrap d-flex">
 
       <button id="wd-add-module-btn" className="btn btn-lg btn-danger me-1 float-end"         
@@ -61,11 +66,13 @@ export default function ModulesControls(
         <button id="wd-collapse-all" className="btn btn-lg btn-secondary float-end me-1"
           type="button">
           Collapse All</button>
+
                 <ModuleEditor dialogTitle="Add Module" moduleName={moduleName}
                     setModuleName={setModuleName} addModule={addModule} />
 
+    </div>)}
     </div>
-    </div>
+    
 );}
 
 
