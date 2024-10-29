@@ -1,66 +1,31 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './AssignmentEditor.css';
 import { useParams } from 'react-router';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateAssignment } from './reducer';
+import { useSelector } from 'react-redux';
 
-export default function AssignmentEditor() {
+function AssignmentEditorNew() {
   const { cid, aid } = useParams();
-  const dispatch = useDispatch();
+
   const assignments = useSelector((state: any) => state.assignmentReducer.assignments);
   const navigate = useNavigate();
   const aidUpdate = aid?.split(":")[1];
-
-  const assignment = assignments.find(
-    (assignment: any) => assignment.course === cid && assignment._id === aidUpdate
-  );
-  // Local state for editable fields
-  const [title, setTitle] = useState(assignment?.title || '');
-  const [description, setDescription] = useState(assignment?.description || '');
-  const [points, setPoints] = useState(assignment?.points || 0);
-  const [dueDate, setDueDate] = useState(assignment?.dueDate || '');
-  const [availableFrom, setAvailableFrom] = useState(assignment?.availableFrom || '');
-  const [availableUntil, setAvailableUntil] = useState(assignment?.availableUntil || '');
-
-  const handleSave = () => {
-    // Dispatch the update action with the modified assignment data
-    dispatch(
-      updateAssignment({
-        _id: aidUpdate,
-        title,
-        description,
-        points,
-        dueDate,
-        availableFrom,
-        availableUntil,
-        course: cid,
-      })
-    );
-    navigate(`/Kanbas/Courses/${cid}/Assignments`); // Navigate back to assignments screen
-  };
-
-  const handleCancel = () => {
-    navigate(`/Kanbas/Courses/${cid}/Assignments`); // Navigate back without saving
-  };
 
   return (
     <div className="container mt-2" id="wd-assignments-editor">
       <div className="wd-main-content-offset p-3">
         {/* Assignment Name */}
         {assignments
-          .filter((assignment: any) => assignment.course === cid && assignment._id === aidUpdate) 
-          .map((assignment: any) => (
+          .filter((assignment: any) => (
             
             <div key={assignment._id}>
               <div className="mb-3">
                 <label htmlFor="wd-name" className="form-label fw-bold">
-                  Assignment Namea
+                  Assignment Name
                 </label>
                 <input
                   id="wd-name"
                   defaultValue={assignment.title}
-                  onChange={(e) => setTitle(e.target.value)}
                   className="form-control"
                 />
               </div>
@@ -75,7 +40,6 @@ export default function AssignmentEditor() {
                   className="form-control"
                   rows={5}
                   defaultValue="The assignment is available online. Submit a link to the landing page of the test"
-                  onChange={(e) => setDescription(e.target.value)}
                 />
               </div>
 
@@ -87,9 +51,7 @@ export default function AssignmentEditor() {
                   </label>
                 </div>
                 <div className="col-md-8">
-                  <input id="wd-points" defaultValue={100} 
-                  onChange={(e) => setPoints(Number(e.target.value))}
-                  className="form-control" />
+                  <input id="wd-points" defaultValue={100} className="form-control" />
                 </div>
               </div>
 
@@ -238,8 +200,7 @@ export default function AssignmentEditor() {
                         <input
                           type="date"
                           id="wd-due-date"
-                          defaultValue="2024-05-13"
-                          onChange={(e) => setDueDate(e.target.value)}
+                          value="2024-05-13"
                           className="form-control"
                         />
                       </div>
@@ -254,8 +215,7 @@ export default function AssignmentEditor() {
                         <input
                           type="date"
                           id="wd-available-from"
-                          defaultValue="2024-05-06"
-                          onChange={(e) => setAvailableFrom(e.target.value)}
+                          value="2024-05-06"
                           className="form-control"
                         />
                       </div>
@@ -266,8 +226,7 @@ export default function AssignmentEditor() {
                         <input
                           type="date"
                           id="wd-available-until"
-                          defaultValue="2024-05-20"
-                          onChange={(e) => setAvailableUntil(e.target.value)}
+                          value="2024-05-20"
                           className="form-control"
                         />
                       </div>
@@ -283,14 +242,14 @@ export default function AssignmentEditor() {
                 <button
                   className="btn btn-secondary me-2"
                   type="submit"
-                  onClick={handleCancel}
+                  onClick={() => navigate(`/Kanbas/Courses/${assignment.course}/Assignments`)}
                 >
                   Cancel
                 </button>
                   <button
                   className="btn btn-danger"
                   type="submit"
-                  onClick={handleSave}
+                  onClick={() => navigate(`/Kanbas/Courses/${assignment.course}/Assignments`)}
                 >
                   Save
                 </button>
@@ -301,7 +260,5 @@ export default function AssignmentEditor() {
     </div>
   );
 }
-function dispatch(arg0: any) {
-  throw new Error('Function not implemented.');
-}
 
+export default AssignmentEditorNew;

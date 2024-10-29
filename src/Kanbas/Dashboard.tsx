@@ -20,7 +20,7 @@ export default function Dashboard(
       <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
 
  {currentUser.role === "FACULTY" && (
-  <div>
+  <>
     <h5>New Course</h5>
     <button className="btn btn-primary float-end"
             id="wd-add-new-course-click"
@@ -41,7 +41,7 @@ export default function Dashboard(
       onChange={(e) => setCourse({ ...course, description: e.target.value }) } />
 
       <hr />
-  </div>
+  </>
 )}
 
       <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2> <hr />
@@ -74,7 +74,7 @@ export default function Dashboard(
                       <button className="btn btn-primary"> Go </button>
 
  {currentUser.role === "FACULTY" && (
-  <div>
+  <>
                       <button onClick={(event) => {
                                 event.preventDefault();
                                 deleteCourse(course._id);
@@ -91,7 +91,7 @@ export default function Dashboard(
                         className="btn btn-warning me-2 float-end" >
                         Edit
                       </button>
-  </div>
+  </>
 )}
 
                     </div>

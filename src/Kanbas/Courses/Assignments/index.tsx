@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AssignmentControls from './AssignmentControls';
 import { BsGripVertical } from 'react-icons/bs';
 import AssignmentControlsButtons from './AssignmentControlsButtons';
@@ -7,19 +7,35 @@ import { PiNotePencilThin } from 'react-icons/pi';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import * as db from '../../Database';
+import { useDispatch, useSelector } from 'react-redux';
+import { add } from '../../../Labs/Lab3/Math';
+import { addAssignment, deleteAssignment } from './reducer';
+import { FaPencil } from "react-icons/fa6";
+import { FaTrash } from "react-icons/fa6";
 
+export default function Assignments(
 
-const assignmentId = 123; // Example ID, you can replace it with actual dynamic value
-
-export default function Assignments() {
+) {
 
   const { cid } = useParams();
-  const assignments = db.assignments;
+
+  const [assignmentName, setAssignmentName] = useState("");
+  
+  const test = useSelector((state: any) => {
+    return state.assignmentReducer;
+  });
+
+  const assignments = test.assignments;
+  const dispatch = useDispatch();
 
   return (
     <div>
 
-      <AssignmentControls /><br /><br />
+      <AssignmentControls assignmentName={assignmentName} setAssignmentName={setAssignmentName}
+        addAssignment={() => {
+          dispatch(addAssignment({ name: assignmentName, course: cid }));
+          setAssignmentName("");
+      }} /><br /><br />
       
 
       <ul id="wd-assignment" className="list-group rounded-0">
@@ -68,9 +84,11 @@ export default function Assignments() {
                 <h6 className="mb-1"><strong>{assignment.title}</strong></h6>
                 <small className="text-muted"><span style={{ color: 'red' }}>Multiple Modules</span> | <strong>Not available until</strong> May 6 at 12:00am | <strong>Due</strong> May 13 at 11:59pm | 100 pts</small>
               </div>
-              <LessonControlButtons    />
+              <LessonControlButtons assignmentID={assignment._id} deleteAssignment={(assignmentID) => {
+                dispatch(deleteAssignment(assignmentID));
+              }
+              } />
             </li>
-
           ))}
           </ul>
         </li>

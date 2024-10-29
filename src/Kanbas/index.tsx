@@ -10,6 +10,7 @@ import { useState } from "react";
 import store from "./store";
 import { Provider } from "react-redux";
 import ProtectedRoute from "./Account/ProtectedRoute";
+import AssignmentEditor from "./Courses/Assignments/AssignmentEditor";
 
 export default function Kanbas() {
 
