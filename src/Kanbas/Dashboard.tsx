@@ -59,13 +59,14 @@ export default function Dashboard({
           </button>
 
           <br />
+          {/* Bind input fields to the selected course state */}
           <input
-            defaultValue={course.name}
+            value={course?.name || ''} // Use the course name from state
             className="form-control mb-2"
             onChange={(e) => setCourse({ ...course, name: e.target.value })}
           />
           <textarea
-            defaultValue={course.description}
+            value={course?.description || ''} // Use the course description from state
             className="form-control"
             onChange={(e) =>
               setCourse({ ...course, description: e.target.value })
@@ -148,6 +149,7 @@ export default function Dashboard({
                             id="wd-edit-course-click"
                             onClick={(event) => {
                               event.preventDefault();
+                              // Set the course state with the selected course data
                               setCourse(course);
                             }}
                             className="btn btn-warning me-2 float-end"
