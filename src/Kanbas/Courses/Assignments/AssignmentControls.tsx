@@ -12,14 +12,10 @@ export default function AssignmentControls(
   {
     assignmentName,
     setAssignmentName,
-    // assignmentID,
-    // setAssignmentID,
     addAssignment,
   }: {
     assignmentName: string;
     setAssignmentName: (title: string) => void;
-    // assignmentID: string;
-    // setAssignmentID: (id: string) => void;
     addAssignment: () => void;
   }
 ) {
@@ -37,8 +33,7 @@ export default function AssignmentControls(
   };
 
   const handleAssignmentClick = () => {
-    const newAid = generateNewId();
-    navigate(`/Kanbas/Courses/${course?._id}/Assignments/Assignment:${newAid}`);
+    navigate(`/Kanbas/Courses/${course?._id}/Assignments/AssignmentEditorNew`);
   };
 
   return (

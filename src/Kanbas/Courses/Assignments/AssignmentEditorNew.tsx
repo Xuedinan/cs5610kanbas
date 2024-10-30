@@ -1,31 +1,60 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './AssignmentEditor.css';
 import { useParams } from 'react-router';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { addAssignment } from './reducer' // Adjust path as needed
 
 function AssignmentEditorNew() {
-  const { cid, aid } = useParams();
-
-  const assignments = useSelector((state: any) => state.assignmentReducer.assignments);
+  const { cid } = useParams();
   const navigate = useNavigate();
-  const aidUpdate = aid?.split(":")[1];
+  const dispatch = useDispatch();
 
+  // Local state for form fields
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [points, setPoints] = useState(100);
+  const [group, setGroup] = useState('option1');
+  const [gradeDisplay, setGradeDisplay] = useState('option1');
+  const [submissionType, setSubmissionType] = useState('option1');
+  const [dueDate, setDueDate] = useState('2024-05-13');
+  const [availableFrom, setAvailableFrom] = useState('2024-05-06');
+  const [availableUntil, setAvailableUntil] = useState('2024-05-20');
+
+  // Save handler
+  const handleSave = () => {
+    const newAssignment = {
+      _id: new Date().getTime().toString(), // Generate a unique ID
+      title,
+      description,
+      points,
+      group,
+      gradeDisplay,
+      submissionType,
+      dueDate,
+      availableFrom,
+      availableUntil,
+      course: cid, // Associate assignment with the course ID
+    };
+
+    // Dispatch addAssignment action
+    dispatch(addAssignment(newAssignment));
+
+    // Navigate back to Assignments page
+    navigate(`/Kanbas/Courses/${cid}/Assignments`);
+  };
   return (
     <div className="container mt-2" id="wd-assignments-editor">
       <div className="wd-main-content-offset p-3">
-        {/* Assignment Name */}
-        {assignments
-          .filter((assignment: any) => (
-            
-            <div key={assignment._id}>
+            <div key="test">
               <div className="mb-3">
                 <label htmlFor="wd-name" className="form-label fw-bold">
                   Assignment Name
                 </label>
                 <input
                   id="wd-name"
-                  defaultValue={assignment.title}
+                  defaultValue="Please enter the name of the assignment"
+                                onChange={(e) => setTitle(e.target.value)}
                   className="form-control"
                 />
               </div>
@@ -40,6 +69,8 @@ function AssignmentEditorNew() {
                   className="form-control"
                   rows={5}
                   defaultValue="The assignment is available online. Submit a link to the landing page of the test"
+                                onChange={(e) => setDescription(e.target.value)}
+
                 />
               </div>
 
@@ -51,7 +82,9 @@ function AssignmentEditorNew() {
                   </label>
                 </div>
                 <div className="col-md-8">
-                  <input id="wd-points" defaultValue={100} className="form-control" />
+                  <input id="wd-points" defaultValue={100} className="form-control" 
+                                  onChange={(e) => setPoints(Number(e.target.value))}
+                                  />
                 </div>
               </div>
 
@@ -63,7 +96,8 @@ function AssignmentEditorNew() {
                   </label>
                 </div>
                 <div className="col-md-8">
-                  <select id="wd-group" className="form-select">
+                  <select id="wd-group" className="form-select"
+                                  onChange={(e) => setGroup(e.target.value)}>
                     <option value="option1">ASSIGNMENTS</option>
                     <option value="option2">Option 2</option>
                   </select>
@@ -78,7 +112,8 @@ function AssignmentEditorNew() {
                   </label>
                 </div>
                 <div className="col-md-8">
-                  <select id="wd-display-grade-as" className="form-select">
+                  <select id="wd-display-grade-as" className="form-select"
+                                  onChange={(e) => setGradeDisplay(e.target.value)}>
                     <option value="option1">Percentage</option>
                     <option value="option2">Option 2</option>
                   </select>
@@ -96,7 +131,8 @@ function AssignmentEditorNew() {
                   <div className="card p-3">
                     <div className="row mb-3">
                       <div className="col-md-12">
-                        <select id="wd-submission-type" className="form-select">
+                        <select id="wd-submission-type" className="form-select"
+                        onChange={(e) => setSubmissionType(e.target.value)}>
                           <option value="option1">Online</option>
                           <option value="option2">Option 2</option>
                         </select>
@@ -202,6 +238,7 @@ function AssignmentEditorNew() {
                           id="wd-due-date"
                           value="2024-05-13"
                           className="form-control"
+                          onChange={(e) => setDueDate(e.target.value)}
                         />
                       </div>
                     </div>
@@ -217,6 +254,7 @@ function AssignmentEditorNew() {
                           id="wd-available-from"
                           value="2024-05-06"
                           className="form-control"
+                          onChange={(e) => setAvailableFrom(e.target.value)}
                         />
                       </div>
                       <div className="col-md-6">
@@ -228,6 +266,7 @@ function AssignmentEditorNew() {
                           id="wd-available-until"
                           value="2024-05-20"
                           className="form-control"
+                          onChange={(e) => setAvailableUntil(e.target.value)}
                         />
                       </div>
                     </div>
@@ -242,20 +281,20 @@ function AssignmentEditorNew() {
                 <button
                   className="btn btn-secondary me-2"
                   type="submit"
-                  onClick={() => navigate(`/Kanbas/Courses/${assignment.course}/Assignments`)}
+                  onClick={() => navigate(`/Kanbas/Courses/${cid}/Assignments`)}
                 >
                   Cancel
                 </button>
                   <button
                   className="btn btn-danger"
                   type="submit"
-                  onClick={() => navigate(`/Kanbas/Courses/${assignment.course}/Assignments`)}
+                  onClick={handleSave}
                 >
                   Save
                 </button>
               </div>
             </div>
-          ))}
+      
       </div>
     </div>
   );
