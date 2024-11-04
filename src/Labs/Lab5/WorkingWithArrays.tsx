@@ -67,14 +67,6 @@ export default function WorkingWithArrays() {
             <br /><br /><hr />
 
 
-
-            {/* <input className="form-check-input" type="checkbox" id="wd-completed"
-                defaultChecked={assignment.completed}
-                onChange={(e) => setAssignment({ ...assignment, completed: e.target.checked })} />
-            <label className="form-check-label" htmlFor="wd-completed"> Completed </label> */}
-
-
-
             <a href={`${API}/${todo.id}/description/${todo.description}`} className="btn btn-primary float-end">
                 Update Description</a>
             <input value={todo.id} className="form-control w-25 float-start me-2"

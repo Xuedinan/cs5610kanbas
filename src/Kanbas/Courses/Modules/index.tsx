@@ -20,6 +20,11 @@ import * as client from "./client";
 export default function Modules() {
   const { cid } = useParams();
   const dispatch = useDispatch();
+  const createModule = async (module: any) => {
+    const newModule = await client.createModule(cid as string, module);
+    dispatch(addModule(newModule));
+  };
+
 
   const [moduleName, setModuleName] = useState("");
 
@@ -171,7 +176,7 @@ export default function Modules() {
       <div>
         <ModulesControls moduleName={moduleName} setModuleName={setModuleName}
           addModule={() => {
-            dispatch(addModule({ name: moduleName, course: cid }));
+            createModule({ name: moduleName, course: cid });
             setModuleName("");
           }} /> <br /><br /><br /><br />
 
