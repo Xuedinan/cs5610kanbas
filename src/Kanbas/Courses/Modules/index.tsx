@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ModulesControls from './ModulesControls';
 import { BsGripVertical, BsPlug } from 'react-icons/bs';
 import ModuleControlButtons from './ModuleControlButtons';
@@ -12,21 +12,31 @@ import { IoIosArrowDown, IoIosGitNetwork } from 'react-icons/io';
 import { GrNotes } from 'react-icons/gr';
 import { GoRocket } from 'react-icons/go';
 import { useParams } from "react-router";
-import { addModule, editModule, updateModule, deleteModule } from "./reducer";
+import { setModules, addModule, editModule, updateModule, deleteModule } from "./reducer";
 import { useSelector, useDispatch } from "react-redux";
-
+import * as client from "./client";
 
 
 export default function Modules() {
   const { cid } = useParams();
+  const dispatch = useDispatch();
+
   const [moduleName, setModuleName] = useState("");
-  
+
   const test = useSelector((state: any) => {
     return state.modulesReducer;
   });
 
+  const fetchModules = async () => {
+    const modules = await client.findModulesForCourse(cid as string);
+    dispatch(setModules(modules));
+  };
+  useEffect(() => {
+    fetchModules();
+  }, []);
+
   const modules = test.modules;
-  const dispatch = useDispatch();
+
 
 
   const [isLeftMenuVisible, setLeftMenuVisible] = useState(false);
@@ -34,12 +44,12 @@ export default function Modules() {
 
   const toggleLeftMenu = () => {
     setLeftMenuVisible(!isLeftMenuVisible);
-    if (isRightMenuVisible) setRightMenuVisible(false); 
+    if (isRightMenuVisible) setRightMenuVisible(false);
   };
 
   const toggleRightMenu = () => {
     setRightMenuVisible(!isRightMenuVisible);
-    if (isLeftMenuVisible) setLeftMenuVisible(false); 
+    if (isLeftMenuVisible) setLeftMenuVisible(false);
   };
 
   return (
@@ -126,31 +136,31 @@ export default function Modules() {
 
           <div className="p-4 z-10k">
             <Link to="/Kanbas/Courses/1234/Home" className="list-group-item border-0 text-danger">
-            <IoHomeOutline className="align-self-center me-3"/>
+              <IoHomeOutline className="align-self-center me-3" />
               Home
             </Link>
             <Link to="/Kanbas/Courses/1234/Modules" className="list-group-item text-danger border-0">
-            <IoIosGitNetwork className="align-self-center me-3" />
+              <IoIosGitNetwork className="align-self-center me-3" />
               Modules
             </Link>
             <Link to="/Kanbas/Courses/1234/Piazza" className="list-group-item text-danger border-0">
-            <BsPlug className="align-self-center me-3" />
+              <BsPlug className="align-self-center me-3" />
               Piazza
             </Link>
             <Link to="/Kanbas/Courses/1234/Zoom" className="list-group-item text-danger border-0">
-            <BsPlug className="align-self-center me-3" />
+              <BsPlug className="align-self-center me-3" />
               Zoom
             </Link>
             <Link to="/Kanbas/Courses/1234/Assignments" className="list-group-item text-danger border-0">
-            <GrNotes className="align-self-center me-3"/>
+              <GrNotes className="align-self-center me-3" />
               Assignments
             </Link>
             <Link to="/Kanbas/Courses/1234/Quizzes" className="list-group-item text-danger border-0">
-            <GoRocket className="align-self-center me-3"/>
+              <GoRocket className="align-self-center me-3" />
               Quizzes
             </Link>
             <Link to="/Kanbas/Courses/:cid/People" className="list-group-item text-danger border-0">
-            <IoPeopleOutline className="align-self-center me-3"/>
+              <IoPeopleOutline className="align-self-center me-3" />
               People
             </Link>
           </div>
@@ -159,56 +169,56 @@ export default function Modules() {
 
 
       <div>
-      <ModulesControls moduleName={moduleName} setModuleName={setModuleName}
-        addModule={() => {
-          dispatch(addModule({ name: moduleName, course: cid }));
-          setModuleName("");
-        }} /> <br /><br /><br /><br />
-        
+        <ModulesControls moduleName={moduleName} setModuleName={setModuleName}
+          addModule={() => {
+            dispatch(addModule({ name: moduleName, course: cid }));
+            setModuleName("");
+          }} /> <br /><br /><br /><br />
+
         <ul id="wd-modules" className="list-group rounded-0 d-flex flex-grow d-md-block d-lg-block">
-        {modules
-          .filter((module: any) => module.course === cid)
-          .map((module: any) => (
+          {modules
+            .filter((module: any) => module.course === cid)
+            .map((module: any) => (
 
-          <li className="wd-module list-group-item p-0 mb-5 fs-5 border-gray">
-            <div className="wd-title p-3 ps-2 bg-secondary"> 
-              <BsGripVertical className="me-2 fs-3" />
+              <li className="wd-module list-group-item p-0 mb-5 fs-5 border-gray">
+                <div className="wd-title p-3 ps-2 bg-secondary">
+                  <BsGripVertical className="me-2 fs-3" />
 
-              {!module.editing && module.name}
-              { module.editing && (
-            <input className="form-control w-50 d-inline-block"
-               onChange={(e) => 
-                dispatch(
-                updateModule({ ...module, name: e.target.value })
-              )
-            }
-               onKeyDown={(e) => {
-                 if (e.key === "Enter") {
-                   dispatch(updateModule({ ...module, editing: false }));
-                 }
-               }}
-               defaultValue={module.name}/>)}
+                  {!module.editing && module.name}
+                  {module.editing && (
+                    <input className="form-control w-50 d-inline-block"
+                      onChange={(e) =>
+                        dispatch(
+                          updateModule({ ...module, name: e.target.value })
+                        )
+                      }
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          dispatch(updateModule({ ...module, editing: false }));
+                        }
+                      }}
+                      defaultValue={module.name} />)}
 
-              <ModuleControlButtons moduleId={module._id}
-                  deleteModule={(moduleId) => {
-                    dispatch(deleteModule(moduleId));
-                  }}
-                  editModule={(moduleId) => dispatch(editModule(moduleId))} />
-            </div>
+                  <ModuleControlButtons moduleId={module._id}
+                    deleteModule={(moduleId) => {
+                      dispatch(deleteModule(moduleId));
+                    }}
+                    editModule={(moduleId) => dispatch(editModule(moduleId))} />
+                </div>
 
-            {module.lessons && (
-            <ul className="wd-lessons list-group rounded-0">
-              {module.lessons.map((lesson: any) => (
-              <li className="wd-lesson list-group-item p-3 ps-1">
-                <BsGripVertical className="me-2 fs-3" />
-                {lesson.name} 
-                <LessonControlButtons />
+                {module.lessons && (
+                  <ul className="wd-lessons list-group rounded-0">
+                    {module.lessons.map((lesson: any) => (
+                      <li className="wd-lesson list-group-item p-3 ps-1">
+                        <BsGripVertical className="me-2 fs-3" />
+                        {lesson.name}
+                        <LessonControlButtons />
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </li>
-              ))}
-            </ul>
-            )}
-          </li>
-          ))}
+            ))}
         </ul>
       </div>
     </>
