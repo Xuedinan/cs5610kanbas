@@ -1,13 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './AssignmentEditor.css';
 import { useParams } from 'react-router';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateAssignment } from './reducer';
+import * as client from './client';
 
 export default function AssignmentEditor() {
   const { cid, aid } = useParams();
   const dispatch = useDispatch();
+
+  // update assignment
+  const saveAssignment = async (assignment: any) => {
+    const status = await client.updateAssignment(assignment);
+    dispatch(updateAssignment(assignment));
+  };
+
   const assignments = useSelector((state: any) => state.assignmentReducer.assignments);
   const navigate = useNavigate();
   const aidUpdate = aid?.split(":")[1];
@@ -24,19 +32,18 @@ export default function AssignmentEditor() {
   const [availableUntil, setAvailableUntil] = useState(assignment?.availableUntil || '');
 
   const handleSave = () => {
-    // Dispatch the update action with the modified assignment data
-    dispatch(
-      updateAssignment({
-        _id: aidUpdate,
-        title,
-        description,
-        points,
-        dueDate,
-        availableFrom,
-        availableUntil,
-        course: cid,
-      })
-    );
+    const updatedAssignment = {
+      _id: aidUpdate,
+      title,
+      description,
+      points,
+      dueDate,
+      availableFrom,
+      availableUntil,
+      course: cid,
+    }
+      ;
+    saveAssignment(updatedAssignment);
     navigate(`/Kanbas/Courses/${cid}/Assignments`); // Navigate back to assignments screen
   };
 
@@ -49,9 +56,9 @@ export default function AssignmentEditor() {
       <div className="wd-main-content-offset p-3">
         {/* Assignment Name */}
         {assignments
-          .filter((assignment: any) => assignment.course === cid && assignment._id === aidUpdate) 
+          .filter((assignment: any) => assignment.course === cid && assignment._id === aidUpdate)
           .map((assignment: any) => (
-            
+
             <div key={assignment._id}>
               <div className="mb-3">
                 <label htmlFor="wd-name" className="form-label fw-bold">
@@ -87,9 +94,9 @@ export default function AssignmentEditor() {
                   </label>
                 </div>
                 <div className="col-md-8">
-                  <input id="wd-points" defaultValue={100} 
-                  onChange={(e) => setPoints(Number(e.target.value))}
-                  className="form-control" />
+                  <input id="wd-points" defaultValue={100}
+                    onChange={(e) => setPoints(Number(e.target.value))}
+                    className="form-control" />
                 </div>
               </div>
 
@@ -287,7 +294,7 @@ export default function AssignmentEditor() {
                 >
                   Cancel
                 </button>
-                  <button
+                <button
                   className="btn btn-danger"
                   type="submit"
                   onClick={handleSave}
@@ -300,8 +307,5 @@ export default function AssignmentEditor() {
       </div>
     </div>
   );
-}
-function dispatch(arg0: any) {
-  throw new Error('Function not implemented.');
 }
 
