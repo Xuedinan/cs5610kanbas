@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-quill/dist/quill.snow.css'; // Import styles for the editor
 import Select from 'react-select'; // Import React Select
 import ReactQuill from 'react-quill';
+import { IoBanOutline } from 'react-icons/io5';
 
 export default function QuizForm() {
     const [quizTitle, setQuizTitle] = useState("");
@@ -16,6 +17,8 @@ export default function QuizForm() {
     const [assignedTo, setAssignedTo] = useState<{ value: string; label: string; }[]>([]); // For selected items in Assign to
     const [wordCount, setWordCount] = useState(0);
     const [activeTab, setActiveTab] = useState("details"); // Track the active tab
+    const [points, setPoints] = useState(0); // Points display
+    const [publishStatus, setPublishStatus] = useState("Not Published"); // Publish status display
 
     // Options for the "Assign to" field
     const assignOptions = [
@@ -26,7 +29,7 @@ export default function QuizForm() {
     ];
 
     // Handle content change in the editor to update word count
-    const handleInstructionsChange = (content: any) => {
+    const handleInstructionsChange = (content) => {
         setQuizInstructions(content);
         const text = content.replace(/<[^>]+>/g, ''); // Remove HTML tags
         const words = text.trim().split(/\s+/).filter(Boolean); // Count words
@@ -52,6 +55,20 @@ export default function QuizForm() {
 
     return (
         <div className="container mt-4">
+            {/* Header with Points and Publish Status */}
+            <div className="d-flex justify-content-between align-items-center mb-3">
+                <h3>Quizzes</h3>
+                <div className="d-flex align-items-center">
+                    <span className="me-3">
+                        <strong>Points:</strong> {points}
+                    </span>
+                    <span className="text-muted">
+                        <IoBanOutline />
+                        <i className="bi bi-circle"></i> {publishStatus}
+                    </span>
+                </div>
+            </div>
+
             {/* Custom Tab Navigation */}
             <div className="mb-3 d-flex border-bottom">
                 <span
@@ -94,10 +111,6 @@ export default function QuizForm() {
                                 style={{ height: "200px" }} // Set height of the text editor
                             />
                             <div className="d-flex justify-content-between mt-2">
-                                {/* <button className="btn btn-outline-secondary btn-sm">
-                                    <i className="bi bi-keyboard"></i> Keyboard
-                                </button> */}
-                                <span></span>
                                 <span className="text-muted">{wordCount} words</span>
                             </div>
                         </div>
@@ -181,7 +194,7 @@ export default function QuizForm() {
                                 <label className="form-label">Assign to</label>
                                 <Select
                                     isMulti
-                                    options={assignOptions as any}
+                                    options={assignOptions}
                                     value={assignedTo}
                                     onChange={(selectedOptions) => setAssignedTo(selectedOptions as { value: string; label: string; }[])}
                                     placeholder="Select assignees"
