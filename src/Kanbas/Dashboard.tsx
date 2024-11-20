@@ -29,11 +29,42 @@ export default function Dashboard({
     setShowAllCourses(!showAllCourses);
   };
 
-  const enrollButton = (course: any) => {
-    enrollClient.createEnrollment(course);
+  // const enrollButton = async (course: any) => {
+  //   await enrollClient.createEnrollment(course);
+  // };
+
+  // const unenrollButton = async (course: any) => {
+  //   await enrollClient.deleteEnrollment(course);
+  // };
+
+  const enrollButton = async (course: any) => {
+    try {
+      await enrollClient.createEnrollment(course);
+      setCourse((prevCourses) =>
+        prevCourses.map((c) =>
+          c._id === course._id
+            ? { ...c, enrolled: true }
+            : c
+        )
+      );
+    } catch (error) {
+      console.error("Failed to enroll:", error);
+    }
   };
-  const unenrollButton = (course: any) => {
-    enrollClient.deleteEnrollment(course);
+
+  const unenrollButton = async (course: any) => {
+    try {
+      await enrollClient.deleteEnrollment(course);
+      setCourse((prevCourses) =>
+        prevCourses.map((c) =>
+          c._id === course._id
+            ? { ...c, enrolled: false }
+            : c
+        )
+      );
+    } catch (error) {
+      console.error("Failed to unenroll:", error);
+    }
   };
 
   const enrolledCourseIDs = new Set(
@@ -165,7 +196,7 @@ export default function Dashboard({
                               id="wd-unenroll-course-click"
                               onClick={(event) => {
                                 event.preventDefault();
-                                enrollButton(course);
+                                unenrollButton(course);
                               }}
                               className="btn btn-danger me-2 float-end"
                             >
@@ -176,7 +207,7 @@ export default function Dashboard({
                               id="wd-enroll-course-click"
                               onClick={(event) => {
                                 event.preventDefault();
-                                unenrollButton(course);
+                                enrollButton(course);
                               }}
                               className="btn btn-success float-end"
                             >
