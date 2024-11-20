@@ -11,11 +11,22 @@ export const createCourse = async (course: any) => {
   const response = await axios.post(COURSES_API, course);
   return response.data;
 };
+// export const deleteCourse = async (id: string) => {
+//   const response = await axios.delete(`${COURSES_API}/${id}`);
+//   return response.data;
+// };
+
 export const deleteCourse = async (id: string) => {
-  const response = await axios.delete(`${COURSES_API}/${id}`);
-  return response.data;
+  const { data } = await axios.delete(`${COURSES_API}/${id}`);
+  return data;
 };
+
+// export const updateCourse = async (course: any) => {
+//   const response = await axios.put(`${COURSES_API}/${course._id}`, course);
+//   return response.data;
+// };
+
 export const updateCourse = async (course: any) => {
-  const response = await axios.put(`${COURSES_API}/${course._id}`, course);
-  return response.data;
+  const { data } = await axios.put(`${COURSES_API}/${course._id}`, course);
+  return data;
 };
