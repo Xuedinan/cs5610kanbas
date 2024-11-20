@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { enrollCourse, unenrollCourse } from "./reducer"; // Adjust the path as needed
+import * as enrollClient from "./client"; // Adjust the path as needed
 
 export default function Dashboard({
   courses,
@@ -26,6 +27,13 @@ export default function Dashboard({
 
   const handleEnrollmentClick = () => {
     setShowAllCourses(!showAllCourses);
+  };
+
+  const enrollButton = (course: any) => {
+    enrollClient.createEnrollment(course);
+  };
+  const unenrollButton = (course: any) => {
+    enrollClient.deleteEnrollment(course);
   };
 
   const enrolledCourseIDs = new Set(
@@ -94,16 +102,7 @@ export default function Dashboard({
       <div id="wd-dashboard-courses" className="row">
         <div className="wd-dashboard-course">
           <div className="row row-cols-1 row-cols-md-5 g-4">
-            {(!showAllCourses
-              ? courses.filter((course) =>
-                enrollments.some(
-                  (enrollment: any) =>
-                    enrollment.user === currentUser._id &&
-                    enrollment.course === course._id
-                )
-              )
-              : courses
-            ).map((course) => (
+            {courses.map((course) => (
               <div
                 key={course._id}
                 className="wd-dashboard-course col"
@@ -166,7 +165,7 @@ export default function Dashboard({
                               id="wd-unenroll-course-click"
                               onClick={(event) => {
                                 event.preventDefault();
-                                dispatch(unenrollCourse({ userId: currentUser._id, courseId: course._id }));
+                                enrollButton(course);
                               }}
                               className="btn btn-danger me-2 float-end"
                             >
@@ -177,7 +176,7 @@ export default function Dashboard({
                               id="wd-enroll-course-click"
                               onClick={(event) => {
                                 event.preventDefault();
-                                dispatch(enrollCourse({ userId: currentUser._id, courseId: course._id }));
+                                unenrollButton(course);
                               }}
                               className="btn btn-success float-end"
                             >
