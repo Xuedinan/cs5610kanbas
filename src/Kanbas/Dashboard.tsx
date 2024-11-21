@@ -40,8 +40,8 @@ export default function Dashboard({
   const enrollButton = async (course: any) => {
     try {
       await enrollClient.createEnrollment(course);
-      setCourse((prevCourses) =>
-        prevCourses.map((c) =>
+      setCourse((prevCourses: any[]) =>
+        prevCourses.map((c: { _id: any; }) =>
           c._id === course._id
             ? { ...c, enrolled: true }
             : c
@@ -55,8 +55,8 @@ export default function Dashboard({
   const unenrollButton = async (course: any) => {
     try {
       await enrollClient.deleteEnrollment(course);
-      setCourse((prevCourses) =>
-        prevCourses.map((c) =>
+      setCourse((prevCourses: any[]) =>
+        prevCourses.map((c: { _id: any; }) =>
           c._id === course._id
             ? { ...c, enrolled: false }
             : c
