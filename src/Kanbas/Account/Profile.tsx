@@ -22,7 +22,6 @@ export default function Profile() {
     navigate("/Kanbas/Account/Signin");
   };
 
-
   useEffect(() => { fetchProfile(); }, []);
   const updateProfile = async () => {
     const updatedProfile = await client.updateUser(profile);
