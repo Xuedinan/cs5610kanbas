@@ -29,14 +29,6 @@ export default function Dashboard({
     setShowAllCourses(!showAllCourses);
   };
 
-  // const enrollButton = async (course: any) => {
-  //   await enrollClient.createEnrollment(course);
-  // };
-
-  // const unenrollButton = async (course: any) => {
-  //   await enrollClient.deleteEnrollment(course);
-  // };
-
   const enrollButton = async (course: any) => {
     try {
       await enrollClient.createEnrollment(course);
