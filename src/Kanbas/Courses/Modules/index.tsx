@@ -15,11 +15,17 @@ import { useParams } from "react-router";
 import { setModules, addModule, editModule, updateModule, deleteModule } from "./reducer";
 import { useSelector, useDispatch } from "react-redux";
 import * as client from "./client";
+import * as courseClient from "../client";
 
 
 export default function Modules() {
   const { cid } = useParams();
+  console.log("cid", cid);
   const dispatch = useDispatch();
+
+  const [modules, setModules] = useState<any[]>([]);
+
+
   // create module
   const createModule = async (module: any) => {
     const newModule = await client.createModule(cid as string, module);
@@ -36,25 +42,25 @@ export default function Modules() {
     dispatch(updateModule(module));
   };
 
-  // get modules
-  const fetchModules = async () => {
-    const modules = await client.findModulesForCourse(cid as string);
-    dispatch(setModules(modules));
-  };
-  useEffect(() => {
-    fetchModules();
-  }, []);
-
   const [moduleName, setModuleName] = useState("");
 
-  const test = useSelector((state: any) => {
-    return state.modulesReducer;
-  });
-
-
-  const modules = test.modules;
-
-
+  // get modules
+  const fetchModules = async () => {
+    try {
+      if (cid) {
+        const modules = await courseClient.findModulesForCourse(cid);
+        console.log("Fetched modules:", modules);
+        setModules(modules);
+      }
+    } catch (error) {
+      console.error("Error fetching modules:", error);
+    }
+  };
+  useEffect(() => {
+    if (cid) {
+      fetchModules();
+    }
+  }, [cid]);
 
   const [isLeftMenuVisible, setLeftMenuVisible] = useState(false);
   const [isRightMenuVisible, setRightMenuVisible] = useState(false);
@@ -68,7 +74,7 @@ export default function Modules() {
     setRightMenuVisible(!isRightMenuVisible);
     if (isLeftMenuVisible) setLeftMenuVisible(false);
   };
-
+  console.log("modules", modules);
   return (
     <>
       <div
@@ -156,7 +162,7 @@ export default function Modules() {
               <IoHomeOutline className="align-self-center me-3" />
               Home
             </Link>
-            <Link to="/Kanbas/Courses/1234/Modules" className="list-group-item text-danger border-0">
+            <Link to={`/Kanbas/Courses/${cid}/Modules`} className="list-group-item text-danger border-0">
               <IoIosGitNetwork className="align-self-center me-3" />
               Modules
             </Link>
@@ -194,7 +200,7 @@ export default function Modules() {
 
         <ul id="wd-modules" className="list-group rounded-0 d-flex flex-grow d-md-block d-lg-block">
           {modules
-            .filter((module: any) => module.course === cid)
+            // .filter((module: any) => module.course.toString() === cid)
             .map((module: any) => (
 
               <li className="wd-module list-group-item p-0 mb-5 fs-5 border-gray">

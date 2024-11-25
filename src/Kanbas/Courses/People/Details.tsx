@@ -7,11 +7,13 @@ import * as client from "../../Account/client";
 import React from "react";
 import { FaPencil } from "react-icons/fa6";
 import { FaCheck } from "react-icons/fa";
+import * as peopleClient from "../client";
 
 
 export default function PeopleDetails() {
     const { uid } = useParams();
     const [user, setUser] = useState<any>({});
+
     const navigate = useNavigate();
     const deleteUser = async (uid: string) => {
         await client.deleteUser(uid);
@@ -33,10 +35,13 @@ export default function PeopleDetails() {
         const user = await client.findUserById(uid);
         setUser(user);
     };
+
     useEffect(() => {
         if (uid) fetchUser();
     }, [uid]);
     if (!uid) return null;
+
+
     return (
         <div className="wd-people-details position-fixed top-0 end-0 bottom-0 bg-white p-4 shadow w-25">
             <button onClick={() => navigate(-1)} className="btn position-fixed end-0 top-0 wd-close-details">

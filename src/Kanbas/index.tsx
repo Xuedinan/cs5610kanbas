@@ -109,11 +109,6 @@ export default function Kanbas() {
     );
   };
 
-
-
-
-
-
   return (
     <Provider store={store}>
       <Session>

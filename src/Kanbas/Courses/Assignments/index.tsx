@@ -15,9 +15,7 @@ import { FaTrash } from "react-icons/fa6";
 import * as client from "./client";
 
 
-export default function Assignments(
-
-) {
+export default function Assignments() {
 
   const { cid } = useParams();
   const dispatch = useDispatch();
@@ -34,6 +32,8 @@ export default function Assignments(
     dispatch(deleteAssignment(assignmentID));
   };
 
+  const assignments = useSelector((state: any) => state.assignmentReducer.assignments);
+
   // get assignment
   const fetchAssignments = async () => {
     const assignments = await client.findAssignmentsForCourse(cid as string);
@@ -43,12 +43,10 @@ export default function Assignments(
     fetchAssignments();
   }, []);
 
-
   const [assignmentName, setAssignmentName] = useState("");
-  const test = useSelector((state: any) => {
-    return state.assignmentReducer;
-  });
-  const assignments = test.assignments;
+
+  console.log(assignments);
+
 
   return (
     <div>
@@ -93,7 +91,7 @@ export default function Assignments(
 
           <ul className="wd-lessons list-group rounded-0">
             {assignments
-              .filter((assignment: any) => assignment.course === cid)
+              // .filter((assignment: any) => assignment.course === cid)
               .map((assignment: any) => (
 
                 <li className="wd-lesson list-group-item p-3 ps-1 d-flex align-items-center">
