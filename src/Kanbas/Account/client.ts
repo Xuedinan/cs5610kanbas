@@ -39,7 +39,9 @@ export const createCourse = async (course: any) => {
 };
 
 export const findAllUsers = async () => {
-  const response = await axiosWithCredentials.get(USERS_API);
+  const response = await axiosWithCredentials.get(
+    `${REMOTE_SERVER}/api/Account/users`
+  );
   return response.data;
 };
 export const findUsersByRole = async (role: string) => {
