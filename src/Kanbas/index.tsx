@@ -24,6 +24,7 @@ export default function Kanbas() {
   });
 
   const { currentUser } = useSelector((state: any) => state.accountReducer);
+  console.log(currentUser);
 
   const [enrolling, setEnrolling] = useState<boolean>(false);
 
