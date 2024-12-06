@@ -41,11 +41,31 @@ export const deleteAssignment = async (assignmentID: string) => {
     return response.data;
 };
 
+// export const createAssignmentNew = async (assignment: any) => {
+//     const courseId = assignment.course;
+//     const response = await axiosWithCredentials.post(`${COURSES_API}/${courseId}/assignments/AssignmentEditorNew`, assignment);
+//     return response.data;
+// };
+
+
 export const createAssignmentNew = async (assignment: any) => {
-    const courseId = assignment.course;
-    const response = await axiosWithCredentials.post(`${COURSES_API}/${courseId}/assignments/AssignmentEditorNew`, assignment);
-    return response.data;
+    try {
+        const courseId = assignment.course;
+        if (!courseId) {
+            throw new Error("Course ID is required");
+        }
+
+        const response = await axiosWithCredentials.post(
+            `${COURSES_API}/${courseId}/assignments/AssignmentEditorNew`,
+            assignment
+        );
+        return response.data;
+    } catch (error) {
+        console.error("Failed to create assignment:", error);
+        throw error; // 可以选择抛出错误，让调用者处理
+    }
 };
+
 
 export const createAssForCourse = async (assignment: any) => {
     const courseId = assignment.course;

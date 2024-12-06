@@ -9,17 +9,38 @@ import * as client from './client';
 
 function AssignmentEditorNew({ cid }: { cid: any }) {
   // const { cid } = useParams();
-  console.log('Saving assignment...', cid);
+  // console.log('Saving assignment...', cid);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   // create assignment
+  // const createAssignment = async (assignment: any) => {
+  //   const newAssignment = { course: cid, name: assignment.name };
+  //   const createdAssignment = await client.createAssignmentNew(newAssignment);
+  //   dispatch(addAssignment(createdAssignment));
+  // };
+
   const createAssignment = async (assignment: any) => {
-    const newAssignment = { course: cid, name: assignment.name };
-    const createdAssignment = await client.createAssignmentNew(newAssignment);
-    dispatch(addAssignment(createdAssignment));
+    if (!cid) {
+      console.error("Course ID (cid) is missing");
+      return;
+    }
+    if (!assignment.name) {
+      console.error("Assignment name is missing");
+      return;
+    }
+
+    const newAssignment = { course: cid, title: assignment.name };
+    try {
+      const createdAssignment = await client.createAssignmentNew(newAssignment);
+      dispatch(addAssignment(createdAssignment));
+    } catch (error) {
+      console.error("Failed to create assignment:", error);
+    }
   };
+
+
 
   // Local state for form fields
   const [title, setTitle] = useState('');
@@ -35,7 +56,7 @@ function AssignmentEditorNew({ cid }: { cid: any }) {
   // Save handler
   const handleSave = () => {
     const newAssignment = {
-      _id: new Date().getTime().toString(), // Generate a unique ID
+      // _id: new Date().getTime().toString(), // Generate a unique ID
       title,
       description,
       points,
@@ -49,7 +70,7 @@ function AssignmentEditorNew({ cid }: { cid: any }) {
     };
     createAssignment(newAssignment);
 
-    console.log('Assignment created:', newAssignment);
+    // console.log('Assignment created:', newAssignment);
     // Navigate back to Assignments page
     navigate(`/Kanbas/Courses/${cid}/Assignments`);
   };
@@ -63,7 +84,7 @@ function AssignmentEditorNew({ cid }: { cid: any }) {
             </label>
             <input
               id="wd-name"
-              defaultValue="Please enter the name of the assignment"
+              value={title}
               onChange={(e) => setTitle(e.target.value)}
               className="form-control"
             />
