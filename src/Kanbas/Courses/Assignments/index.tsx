@@ -51,7 +51,7 @@ export default function Assignments() {
   return (
     <div>
 
-      <AssignmentControls assignmentName={assignmentName} setAssignmentName={setAssignmentName}
+      <AssignmentControls assignmentName={assignmentName} setAssignmentName={setAssignmentName} cid={cid}
         addAssignment={() => {
           createAssignment({ name: assignmentName, course: cid });
           setAssignmentName("");

@@ -19,14 +19,39 @@ export const createAssignment = async (courseId: string, assignment: any) => {
 
 const ASSIGNMENT_API = `${REMOTE_SERVER}/api/assignments`;
 
+export const updateClientAssignment = async (assignment: any) => {
+    const { data } = await axiosWithCredentials.
+        put(`${ASSIGNMENT_API}/${assignment._id}`, assignment);
+    console.log("client response", data);
+    return data;
+};
+
+
+export const updateCourse = async (course: any) => {
+    const { data } = await axiosWithCredentials.put(
+        `${COURSES_API}/${course._id}`,
+        course
+    );
+    return data;
+};
+
 export const deleteAssignment = async (assignmentID: string) => {
     const response = await axiosWithCredentials
         .delete(`${ASSIGNMENT_API}/${assignmentID}`);
     return response.data;
 };
 
-export const updateAssignment = async (assignment: any) => {
-    const response = await axiosWithCredentials.
-        put(`${ASSIGNMENT_API}/${assignment._id}`, assignment);
+export const createAssignmentNew = async (assignment: any) => {
+    const courseId = assignment.course;
+    const response = await axiosWithCredentials.post(`${COURSES_API}/${courseId}/assignments/AssignmentEditorNew`, assignment);
+    return response.data;
+};
+
+export const createAssForCourse = async (assignment: any) => {
+    const courseId = assignment.course;
+    const response = await axiosWithCredentials.post(
+        `${COURSES_API}/${courseId}/assignments`,
+        assignment
+    );
     return response.data;
 };

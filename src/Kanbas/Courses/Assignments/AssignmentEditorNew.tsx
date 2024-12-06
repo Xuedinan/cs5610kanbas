@@ -7,15 +7,18 @@ import { addAssignment } from './reducer' // Adjust path as needed
 import * as client from './client';
 
 
-function AssignmentEditorNew() {
-  const { cid } = useParams();
+function AssignmentEditorNew({ cid }: { cid: any }) {
+  // const { cid } = useParams();
+  console.log('Saving assignment...', cid);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   // create assignment
   const createAssignment = async (assignment: any) => {
-    const newAssignment = await client.createAssignment(cid as string, assignment);
-    dispatch(addAssignment(newAssignment));
+    const newAssignment = { course: cid, name: assignment.name };
+    const createdAssignment = await client.createAssignmentNew(newAssignment);
+    dispatch(addAssignment(createdAssignment));
   };
 
   // Local state for form fields
@@ -46,6 +49,7 @@ function AssignmentEditorNew() {
     };
     createAssignment(newAssignment);
 
+    console.log('Assignment created:', newAssignment);
     // Navigate back to Assignments page
     navigate(`/Kanbas/Courses/${cid}/Assignments`);
   };

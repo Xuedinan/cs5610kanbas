@@ -20,19 +20,19 @@ import * as courseClient from "../client";
 
 export default function Modules() {
   const { cid } = useParams();
-  console.log("cid", cid);
   const dispatch = useDispatch();
-
   const [modules, setModules] = useState<any[]>([]);
-
 
   // create module
   const createModule = async (module: any) => {
-    const newModule = await client.createModule(cid as string, module);
-    dispatch(addModule(newModule));
+    const newModule = { course: cid, name: moduleName };
+    const createdModule = await courseClient.createModuleForCourse(newModule);
+
+    dispatch(addModule(createdModule));
   };
   // remove modules
   const removeModule = async (moduleId: string) => {
+    console.log("Removing module:", moduleId);
     await client.deleteModule(moduleId);
     dispatch(deleteModule(moduleId));
   };
@@ -74,7 +74,7 @@ export default function Modules() {
     setRightMenuVisible(!isRightMenuVisible);
     if (isLeftMenuVisible) setLeftMenuVisible(false);
   };
-  console.log("modules", modules);
+
   return (
     <>
       <div
@@ -194,7 +194,7 @@ export default function Modules() {
       <div>
         <ModulesControls moduleName={moduleName} setModuleName={setModuleName}
           addModule={() => {
-            createModule({ name: moduleName, course: cid });
+            createModule({ course: cid, name: moduleName });
             setModuleName("");
           }} /> <br /><br /><br /><br />
 

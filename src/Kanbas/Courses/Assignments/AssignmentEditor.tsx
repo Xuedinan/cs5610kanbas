@@ -12,8 +12,10 @@ export default function AssignmentEditor() {
 
   // update assignment
   const saveAssignment = async (assignment: any) => {
-    const status = await client.updateAssignment(assignment);
-    dispatch(updateAssignment(assignment));
+    console.log("assignment", assignment);
+    const status = await client.updateClientAssignment(assignment);
+    console.log("status", status);
+    dispatch(updateAssignment(status));
   };
 
   const assignments = useSelector((state: any) => state.assignmentReducer.assignments);
@@ -42,6 +44,7 @@ export default function AssignmentEditor() {
       availableUntil,
       course: cid,
     }
+    console.log("updated", updatedAssignment)
       ;
     saveAssignment(updatedAssignment);
     navigate(`/Kanbas/Courses/${cid}/Assignments`); // Navigate back to assignments screen
