@@ -21,25 +21,36 @@ function AssignmentEditorNew({ cid }: { cid: any }) {
   //   dispatch(addAssignment(createdAssignment));
   // };
 
-  const createAssignment = async (assignment: any) => {
-    if (!cid) {
-      console.error("Course ID (cid) is missing");
-      return;
-    }
-    if (!assignment.name) {
-      console.error("Assignment name is missing");
-      return;
-    }
+  // const createAssignment = async (assignment: any) => {
+  //   if (!cid) {
+  //     console.error("Course ID (cid) is missing");
+  //     return;
+  //   }
+  //   if (!assignment.title) {
+  //     console.error("Assignment name is missing");
+  //     return;
+  //   }
 
-    const newAssignment = { course: cid, title: assignment.name };
+  //   const newAssignment = { course: cid, title: assignment.name };
+  //   try {
+  //     const createdAssignment = await client.createAssignmentNew(newAssignment);
+  //     dispatch(addAssignment(createdAssignment));
+  //   } catch (error) {
+  //     console.error("Failed to create assignment:", error.message);
+  //     console.error("Axios config:", error.config);
+  //     console.error("Axios request:", error.request);
+  //   }
+  // }
+  const createAssignment = async (assignment: any) => {
+    const assignmentCopy = { ...assignment }; // 创建副本
+    console.log("Before calling client:", assignmentCopy);
     try {
-      const createdAssignment = await client.createAssignmentNew(newAssignment);
+      const createdAssignment = await client.createAssignmentNew(assignmentCopy);
       dispatch(addAssignment(createdAssignment));
     } catch (error) {
       console.error("Failed to create assignment:", error);
     }
   };
-
 
 
   // Local state for form fields
@@ -54,9 +65,31 @@ function AssignmentEditorNew({ cid }: { cid: any }) {
   const [availableUntil, setAvailableUntil] = useState('2024-05-20');
 
   // Save handler
+  // const handleSave = () => {
+  //   const newAssignment = {
+  //     // _id: new Date().getTime().toString(), // Generate a unique ID
+  //     title,
+  //     description,
+  //     points,
+  //     group,
+  //     gradeDisplay,
+  //     submissionType,
+  //     dueDate,
+  //     availableFrom,
+  //     availableUntil,
+  //     course: cid, // Associate assignment with the course ID
+  //   };
+
+  //   console.log('Creating assignment in editor:', newAssignment);
+  //   createAssignment(newAssignment);
+
+  //   // console.log('Assignment created:', newAssignment);
+  //   // Navigate back to Assignments page
+  //   navigate(`/Kanbas/Courses/${cid}/Assignments`);
+  // };
+
   const handleSave = () => {
     const newAssignment = {
-      // _id: new Date().getTime().toString(), // Generate a unique ID
       title,
       description,
       points,
@@ -66,14 +99,14 @@ function AssignmentEditorNew({ cid }: { cid: any }) {
       dueDate,
       availableFrom,
       availableUntil,
-      course: cid, // Associate assignment with the course ID
+      course: cid,
     };
-    createAssignment(newAssignment);
 
-    // console.log('Assignment created:', newAssignment);
-    // Navigate back to Assignments page
+    console.log("Creating assignment in editor:", newAssignment);
+    createAssignment({ ...newAssignment }); // 传递副本以避免引用问题
     navigate(`/Kanbas/Courses/${cid}/Assignments`);
   };
+
   return (
     <div className="container mt-2" id="wd-assignments-editor">
       <div className="wd-main-content-offset p-3">

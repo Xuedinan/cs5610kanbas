@@ -51,32 +51,29 @@ const modulesSlice = createSlice({
   name: "modules",
   initialState,
   reducers: {
-    // 设置所有模块
+
     setModules: (state, { payload: modules }) => {
       state.modules = modules;
     },
 
-    // 添加一个新模块
+
     addModule: (state, { payload: module }) => {
-      // 后端返回的模块直接添加
       state.modules = [...state.modules, module] as any;
     },
 
-    // 删除指定模块
     deleteModule: (state, { payload: moduleId }) => {
       state.modules = state.modules.filter(
         (module: any) => module._id !== moduleId
       );
     },
 
-    // 更新指定模块
+
     updateModule: (state, { payload: updatedModule }) => {
       state.modules = state.modules.map((module: any) =>
         module._id === updatedModule._id ? updatedModule : module
       ) as any;
     },
 
-    // 设置某个模块为编辑状态
     editModule: (state, { payload: moduleId }) => {
       state.modules = state.modules.map((module: any) =>
         module._id === moduleId ? { ...module, editing: true } : module
@@ -85,9 +82,9 @@ const modulesSlice = createSlice({
   },
 });
 
-// 导出 action creators
+
 export const { addModule, deleteModule, updateModule, editModule, setModules } =
   modulesSlice.actions;
 
-// 导出 reducer
+
 export default modulesSlice.reducer;

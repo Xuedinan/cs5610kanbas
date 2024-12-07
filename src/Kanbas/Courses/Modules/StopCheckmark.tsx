@@ -8,4 +8,5 @@ export default function StopCheckmark() {
         className="text-success me-1 position-absolute fs-5" />
       <AiOutlineStop className="text-white me-1 fs-6" />
     </span>
-);}
+  );
+}
