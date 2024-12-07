@@ -27,7 +27,6 @@ export default function Modules() {
   const createModule = async (module: any) => {
     const newModule = { course: cid, name: moduleName };
     const createdModule = await courseClient.createModuleForCourse(newModule);
-
     dispatch(addModule(createdModule));
   };
   // remove modules
@@ -59,8 +58,8 @@ export default function Modules() {
   useEffect(() => {
     if (cid) {
       fetchModules();
-    }
-  }, [cid]);
+    };
+  }, [cid, modules]);
 
   const [isLeftMenuVisible, setLeftMenuVisible] = useState(false);
   const [isRightMenuVisible, setRightMenuVisible] = useState(false);
@@ -195,6 +194,7 @@ export default function Modules() {
         <ModulesControls moduleName={moduleName} setModuleName={setModuleName}
           addModule={() => {
             createModule({ course: cid, name: moduleName });
+            setModules(modules);
             setModuleName("");
           }} /> <br /><br /><br /><br />
 
